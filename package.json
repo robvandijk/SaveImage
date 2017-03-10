@@ -11,9 +11,9 @@
     "description": "This plugin allows you to save an image file to the iOS Photo Library or Android Gallery.",
     "repository": {
         "type": "git",
-        "url": "https://github.com/quiply/SaveImage"
+        "url": "https://github.com/robvandijk/SaveImage"
     },
-    "issue": "https://github.com/quiply/SaveImage/issues",
+    "issue": "https://github.com/robvandijk/SaveImage/issues",
     "keywords": [
         "image",
         "photo library",
@@ -31,10 +31,10 @@
         }
     ],
     "author": {
-        "name": "Quiply Technologies GmbH",
-        "email": "hello@quiply.com",
-        "url": "http://www.quiply.com"
+        "name": "Driving the Vortex B.V.",
+        "email": "info@drivingthevortex.nl",
+        "url": "http://www.drivingthevortex.nl"
     },
     "license": "MIT",
-    "homepage": "https://github.com/quiply/SaveImage#readme"
+    "homepage": "https://github.com/robvandijk/SaveImage#readme"
 }

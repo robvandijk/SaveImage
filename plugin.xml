@@ -4,12 +4,13 @@
         version="0.2.4">
 
     <name>SaveImage</name>
-    <description>This plugin allows you to save an image to the iOS Camera roll / Photo Library or Android Gallery.</description>
+    <description>This plugin allows you to save an image to the iOS Camera roll / Photo Library or Android Gallery.
+    The plugin was forked from quiply/SaveImage and an option to specify an album was added.</description>
     <license>MIT</license>
-    <author>Quiply Technologies GmbH - hello@quiply.com</author>
+    <author>Driving the Vortex B.V. - info@drivingthevortex.nl</author>
     <keywords>image,photo library,camera roll,gallery,image gallery</keywords>
-    <repo>https://github.com/quiply/SaveImage.git</repo>
-    <issue>https://github.com/quiply/SaveImage/issues</issue>
+    <repo>https://github.com/robvandijk/SaveImage.git</repo>
+    <issue>https://github.com/robvandijk/SaveImage/issues</issue>
 
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
@@ -28,11 +29,11 @@
         </config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="SaveImage">
-                <param name="android-package" value="com.quiply.cordova.saveimage.SaveImage"/>
+                <param name="android-package" value="org.apache.cordova.saveimage.SaveImage"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/SaveImage.java" target-dir="src/com/quiply/cordova/saveimage"/>
+        <source-file src="src/android/SaveImage.java" target-dir="src/org/apache/cordova/saveimage"/>
     </platform>
 
     <!-- ios -->
