@@ -31,7 +31,7 @@ imagesaver.saveImageToGallery
 
 Save a local JPEG image to the device gallery / camera roll.
 
-    cordova.plugins.imagesaver.saveImageToGallery(nativePathToJpegImage, successCallback, errorCallback);
+    cordova.plugins.imagesaver.saveImageToGallery(nativePathToJpegImage, album, successCallback, errorCallback);
 
 Supported Platforms
 -------------------
@@ -41,7 +41,7 @@ Supported Platforms
 Usage Example
 --------------
 
-Call the `window.cordova.plugins.ImageSaver.saveImageToGallery()` method passing 3 parameters: 1. The native image path for the image to be saved, 2. success callback, 3. error callback
+Call the `window.cordova.plugins.ImageSaver.saveImageToGallery()` method passing 4 parameters: 1. The native image path for the image to be saved, 2. the name of the album, 3. success callback, 4. error callback
 
 ### Example
 ```
@@ -51,7 +51,7 @@ Call the `window.cordova.plugins.ImageSaver.saveImageToGallery()` method passing
 // Android with file prefix: var nativePathToJpegImage = 'file:///data/data/<package_name>/files/some_dir/some_image.jpg'
 // Android without file prefix: var nativePathToJpegImage = '/data/data/<package_name>/files/some_dir/some_image.jpg'
 
-window.cordova.plugins.imagesaver.saveImageToGallery(nativePathToJpegImage, onSaveImageSuccess, onSaveImageError);
+window.cordova.plugins.imagesaver.saveImageToGallery(nativePathToJpegImage, album, onSaveImageSuccess, onSaveImageError);
                                             
 function onSaveImageSuccess() {
     console.log('--------------success');

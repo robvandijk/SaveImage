@@ -28,15 +28,15 @@ import android.util.Log;
  */
 public class SaveImage extends CordovaPlugin {
     public static final int WRITE_PERM_REQUEST_CODE = 1;
-    private final String ACTION = "saveImageToGallery";
+    private final String FILE_ACTION = "saveImageToGallery";
     private final String WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private CallbackContext callbackContext;
-    private String filePath;
-    
+    private String filePath, album;
+
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals(ACTION)) {
+        if (action.equals(FILE_ACTION)) {
             saveImageToGallery(args, callbackContext);
             return true;
         } else {
@@ -54,6 +54,7 @@ public class SaveImage extends CordovaPlugin {
      */  
     private void saveImageToGallery(JSONArray args, CallbackContext callback) throws JSONException {
     	this.filePath = args.getString(0);
+        this.album = args.getString(1).toLowerCase();
     	this.callbackContext = callback;
         Log.d("SaveImage", "SaveImage in filePath: " + filePath);
         
@@ -70,23 +71,22 @@ public class SaveImage extends CordovaPlugin {
         	PermissionHelper.requestPermission(this, WRITE_PERM_REQUEST_CODE, WRITE_EXTERNAL_STORAGE);
         }      
     }
-    
-    
+
     /**
      * Save image to device gallery
      */
     private void performImageSave() throws JSONException {
         // create file from passed path
         File srcFile = new File(filePath);
+        String extension = filePath.substring(filePath.lastIndexOf('.'));
 
-        // destination gallery folder - external storage
-        File dstGalleryFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-        Log.d("SaveImage", "SaveImage dstGalleryFolder: " + dstGalleryFolder);
+        // destination gallery folder: album in photo album
+        String dstGallery = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator + album;
+        File dstGalleryFolder = new File(dstGallery);
 
         try {
             // Create export file in destination folder (gallery)
-            File expFile = copyFile(srcFile, dstGalleryFolder);
+            File expFile = copyFile(srcFile, extension, dstGalleryFolder);
 
             // Update image gallery
             scanPhoto(expFile);
@@ -104,7 +104,7 @@ public class SaveImage extends CordovaPlugin {
      * @param dstFolder     Destination folder where to store file
      * @return File         The newly generated file in destination folder
      */
-    private File copyFile(File srcFile, File dstFolder) {
+    private File copyFile(File srcFile, String extension, File dstFolder) {
         // if destination folder does not exist, create it
         if (!dstFolder.exists()) {
             if (!dstFolder.mkdir()) {
@@ -114,7 +114,7 @@ public class SaveImage extends CordovaPlugin {
 
         // Generate image file name using current date and time
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date());
-        File newFile = new File(dstFolder.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        File newFile = new File(dstFolder.getPath() + File.separator + "IMG_" + timeStamp + extension);
 
         // Read and write image files
         FileChannel inChannel = null;
